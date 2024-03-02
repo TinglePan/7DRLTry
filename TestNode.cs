@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace Proj7DRL;
 
 public partial class TestNode : Node
 {
