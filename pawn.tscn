@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dw1w7pxei7e3n"]
+
+[node name="Pawn" type="Node2D"]
+
+[node name="Center" type="Sprite2D" parent="."]
+
+[node name="TopLeft" type="Sprite2D" parent="."]
+
+[node name="Top" type="Sprite2D" parent="."]
+
+[node name="TopRight" type="Sprite2D" parent="."]
+
+[node name="Right" type="Sprite2D" parent="."]
+
+[node name="BottomRight" type="Sprite2D" parent="."]
+
+[node name="Bottom" type="Sprite2D" parent="."]
+
+[node name="BottomLeft" type="Sprite2D" parent="."]
+
+[node name="Left" type="Sprite2D" parent="."]
