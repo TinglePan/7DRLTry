@@ -1,6 +1,18 @@
-[gd_scene format=3 uid="uid://dw1w7pxei7e3n"]
+[gd_scene load_steps=2 format=3 uid="uid://dw1w7pxei7e3n"]
 
-[node name="Pawn" type="Node2D"]
+[ext_resource type="Script" path="res://scripts/Pawn.cs" id="1_hd7mb"]
+
+[node name="Pawn" type="Node2D" node_paths=PackedStringArray("_centerPartSprite", "_topLeftPartSprite", "_topPartSprite", "_topRightPartSprite", "_rightPartSprite", "_bottomRightPartSprite", "_bottomPartSprite", "_bottomLeftPartSprite", "_leftPartSprite")]
+script = ExtResource("1_hd7mb")
+_centerPartSprite = NodePath("Center")
+_topLeftPartSprite = NodePath("TopLeft")
+_topPartSprite = NodePath("Top")
+_topRightPartSprite = NodePath("TopRight")
+_rightPartSprite = NodePath("Right")
+_bottomRightPartSprite = NodePath("BottomRight")
+_bottomPartSprite = NodePath("Bottom")
+_bottomLeftPartSprite = NodePath("BottomLeft")
+_leftPartSprite = NodePath("Left")
 
 [node name="Center" type="Sprite2D" parent="."]
 

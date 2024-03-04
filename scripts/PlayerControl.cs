@@ -25,6 +25,8 @@ public partial class PlayerControl : Node
 		{ IdConstants.CommandCode.RotateCounterClockwise, IdConstants.RotateDirection.CounterClockwise },
 	};
 	
+	private bool _hasInitialized = false;
+	
 	private Pawn _parent;
 
 	private GameMgr _gameMgr;
@@ -34,23 +36,27 @@ public partial class PlayerControl : Node
 	public override void _Ready()
 	{
 		_parent = GetParent<Pawn>();
-		_gameMgr = GetNode<GameMgr>("/root/GameMgr");
-		_inputMgr = GetNode<InputMgr>("/root/InputMgr");
-		foreach (var (commandCode, direction) in _commandCode2DirectionMap)
-		{
-			_inputMgr.RegisterCommandHandler(commandCode, HandleDirectionCommand);
-			// _inputMgr.RegisterCommandHandler(commandCode, HandleDirectionCommand, isHold:true);
-		}
-
-		foreach (var (commandCode, rotateDirection) in _commandCode2RotateDirectionMap)
-		{
-			_inputMgr.RegisterCommandHandler(commandCode, HandleRotateCommand);
-		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (!_hasInitialized)
+		{
+			_gameMgr = GetNode("/root/Entry/GameMgr") as GameMgr;
+			_inputMgr = GetNode("/root/Entry/InputMgr") as InputMgr;
+			_hasInitialized = true;
+			foreach (var (commandCode, direction) in _commandCode2DirectionMap)
+			{
+				_inputMgr.RegisterCommandHandler(commandCode, HandleDirectionCommand);
+				// _inputMgr.RegisterCommandHandler(commandCode, HandleDirectionCommand, isHold:true);
+			}
+
+			foreach (var (commandCode, rotateDirection) in _commandCode2RotateDirectionMap)
+			{
+				_inputMgr.RegisterCommandHandler(commandCode, HandleRotateCommand);
+			}
+		}
 	}
 	
 	private void HandleDirectionCommand(CommandHandlerArgs args)
@@ -63,7 +69,7 @@ public partial class PlayerControl : Node
 		}
 		else
 		{
-			_parent.Move(direction);
+			_parent.MoveByDir(direction);
 		}
 	}
 

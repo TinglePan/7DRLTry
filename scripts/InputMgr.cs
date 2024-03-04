@@ -11,30 +11,32 @@ public struct CommandHandlerArgs
 
 public partial class InputMgr: Node
 {
+    [Export]
+    public float HoldInputTime = 0.5f;
+    
     private static readonly Dictionary<string, IdConstants.CommandCode> CommandCodeMap = new()
     {
         {"Stall", IdConstants.CommandCode.Stall},
-        {"UpLeft", IdConstants.CommandCode.MoveUpLeft},
-        {"UpRight", IdConstants.CommandCode.MoveUpRight},
-        {"DownLeft", IdConstants.CommandCode.MoveDownLeft},
-        {"DownRight", IdConstants.CommandCode.MoveDownRight},
-        {"Right", IdConstants.CommandCode.MoveRight},
-        {"Left", IdConstants.CommandCode.MoveLeft},
-        {"Up", IdConstants.CommandCode.MoveUp},
-        {"Down", IdConstants.CommandCode.MoveDown},
+        {"MoveUpLeft", IdConstants.CommandCode.MoveUpLeft},
+        {"MoveUpRight", IdConstants.CommandCode.MoveUpRight},
+        {"MoveDownLeft", IdConstants.CommandCode.MoveDownLeft},
+        {"MoveDownRight", IdConstants.CommandCode.MoveDownRight},
+        {"MoveRight", IdConstants.CommandCode.MoveRight},
+        {"MoveLeft", IdConstants.CommandCode.MoveLeft},
+        {"MoveUp", IdConstants.CommandCode.MoveUp},
+        {"MoveDown", IdConstants.CommandCode.MoveDown},
+        {"RotateClockwise", IdConstants.CommandCode.RotateClockwise},
+        {"RotateCounterClockwise", IdConstants.CommandCode.RotateCounterClockwise}
     };
-    
-    private GameMgr _gameMgr;
     
     private Dictionary<IdConstants.CommandCode, CommandHandler> _onAction;
     private Dictionary<IdConstants.CommandCode, CommandHandler> _onActionHold;
     private Dictionary<IdConstants.CommandCode, ulong> _holdStartTime;
     
     public delegate void CommandHandler(CommandHandlerArgs args);
-    
-    public InputMgr(GameMgr gameMgr)
+
+    public override void _Ready()
     {
-        _gameMgr = gameMgr;
         _onAction = new Dictionary<IdConstants.CommandCode, CommandHandler>();
         _onActionHold = new Dictionary<IdConstants.CommandCode, CommandHandler>();
         _holdStartTime = new Dictionary<IdConstants.CommandCode, ulong>();
@@ -62,7 +64,7 @@ public partial class InputMgr: Node
         foreach (var (commandCode, holdStartTime) in _holdStartTime)
         {
             var holdTime = currTime - holdStartTime;
-            if (holdTime > Configuration.HoldInputTime)
+            if (holdTime > HoldInputTime)
             {
                 _onActionHold.GetValueOrDefault(commandCode)?.Invoke(new CommandHandlerArgs
                 {

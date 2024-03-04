@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://jqohutbsssc8"]
-
-[ext_resource type="Script" path="res://scripts/GameMgr.cs" id="1_etc55"]
-[ext_resource type="PackedScene" uid="uid://bnviyd3psi43d" path="res://map.tscn" id="2_ldu4v"]
-
-[node name="Game" type="Node2D"]
-script = ExtResource("1_etc55")
-_mapPrefab = ExtResource("2_ldu4v")
