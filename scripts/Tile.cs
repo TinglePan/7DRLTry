@@ -13,4 +13,9 @@ public partial class Tile : Node
 	public override void _Process(double delta)
 	{
 	}
+
+	public bool IsOccupied()
+	{
+		return false;
+	}
 }

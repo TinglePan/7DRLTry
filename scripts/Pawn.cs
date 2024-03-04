@@ -38,9 +38,8 @@ public partial class Pawn : Node2D
 			{ FlagConstants.Direction.Neutral, _centerPartSprite }
 		};
 		_gameMgr = GetNode<GameMgr>("/root/Entry/GameMgr");
-		_mapPos = new ObservableProperty<Vector2I>("_mapPos", Vector2I.Zero);
+		_mapPos = new ObservableProperty<Vector2I>("_mapPos", new Vector2I(-1, -1));
 		_mapPos.DetailedValueChanged += OnMapPosChanged;
-		_mapPos.Value = Configuration.PlayerStartPos;
 		UpdatePartSprites();
 	}
 
@@ -57,8 +56,13 @@ public partial class Pawn : Node2D
 	public void MoveByDir(FlagConstants.Direction dir)
 	{
 		var toPos = _mapPos.Value + Dir2Dxy(dir);
+		SetPos(toPos);
+		_gameMgr.PlayerTurnEnd();
+	}
+
+	public void SetPos(Vector2I toPos)
+	{
 		if (!_gameMgr.Map.IsPosInBound(toPos)) return;
-		
 		_mapPos.Value = toPos;
 	}
 
@@ -115,14 +119,14 @@ public partial class Pawn : Node2D
 
 	private void UpdatePartSprites()
 	{
-		if (GetNode<PlayerControl>("PlayerControl") is { } playerControl)
+		if (GetNodeOrNull<PlayerControl>("PlayerControl") is { } playerControl)
 		{
 			var controlPanel = _gameMgr.ControlPanel;
 			foreach (var (dir, partSprite) in _dir2PartSpriteMap)
 			{
 				partSprite.Texture = controlPanel.GetTextureAtDir(dir);
 			}
-		} else if (GetNode<Hostile> ("Hostile") is { } hostile)
+		} else if (GetNodeOrNull<Hostile> ("Hostile") is { } hostile)
 		{
 			foreach (var (dir, partSprite) in _dir2PartSpriteMap)
 			{

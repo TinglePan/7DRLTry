@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnviyd3psi43d"]
+[gd_scene load_steps=4 format=3 uid="uid://bnviyd3psi43d"]
 
 [ext_resource type="TileSet" uid="uid://d3o6sc2hrukiw" path="res://map_tileset.tres" id="1_8yorj"]
 [ext_resource type="Script" path="res://scripts/Map.cs" id="1_o54fx"]
+[ext_resource type="PackedScene" uid="uid://bni73rh5ko31b" path="res://tile.tscn" id="2_gappt"]
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_o54fx")
+_tilePrefab = ExtResource("2_gappt")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1

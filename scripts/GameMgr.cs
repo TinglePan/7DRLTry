@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace Proj7DRL.scripts;
@@ -14,11 +15,13 @@ public partial class GameMgr : Node
 	public Pawn PlayerPawn;
 	public ControlPanel ControlPanel;
 	public int TurnCount { get; private set; }
+	public Random Rand;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		Started = false;
+		Rand = new Random(DateTime.Now.Millisecond);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -39,13 +42,41 @@ public partial class GameMgr : Node
 		Map = _mapPrefab.Instantiate() as Map;
 		AddChild(Map);
 		PlayerPawn = _playerPrefab.Instantiate() as Pawn;
-		Map?.AddChild(PlayerPawn);
+		Map?.Spawn(PlayerPawn, Configuration.PlayerStartPos);
 	}
 
 	public void PlayerTurnEnd()
 	{
 		TurnCount++;
+		SpawnEnemyCheck();
+	}
+
+	public void SpawnEnemyAtMapEdge()
+	{
+		var enemyPawn = _enemyPrefab.Instantiate() as Pawn;
+		Map.Spawn(enemyPawn, Map.RandomUnoccupiedPosOnBorders());
 	}
 	
+	public int RandomInt(int max, int min=0)
+	{
+		return Rand.Next(min, max);
+	}
+
+	private void SpawnEnemyCheck()
+	{
+		var checkDone = false;
+		while (!checkDone)
+		{
+			var roll = RandomInt(100);
+			if (roll > 80)
+			{
+				SpawnEnemyAtMapEdge();
+			}
+			else
+			{
+				checkDone = true;
+			}
+		}
+	}
 	
 }
