@@ -1,0 +1,5 @@
+Day0:
+Played Enshrouded too much to forget the jam's entry deadline. Gonna try develop anyway. By the way, anyone knows who designed maps in Enshrouded? He's really a genuis at hiding treasure chests. I'd like to follow him on tweeter.
+
+Day1:
+Plan to do: Character control. Map. Enemies. As simple as possible. I plan to make the map small and with no initial terrains just like Brotato, so I do not have to code complex mapgen. Enemies spawn at map edges and chase the player in melee.
