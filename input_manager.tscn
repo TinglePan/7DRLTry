@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5e5oc17dntl8"]
+
+[ext_resource type="Script" path="res://scripts/InputMgr.cs" id="1_32pjl"]
+
+[node name="InputMgr" type="Node2D"]
+script = ExtResource("1_32pjl")

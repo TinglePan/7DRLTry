@@ -1,0 +1,14 @@
+[gd_scene load_steps=6 format=3 uid="uid://jqohutbsssc8"]
+
+[ext_resource type="Script" path="res://scripts/GameMgr.cs" id="1_grx8h"]
+[ext_resource type="PackedScene" uid="uid://bnviyd3psi43d" path="res://map.tscn" id="2_y8it7"]
+[ext_resource type="PackedScene" uid="uid://djaluh64fbddn" path="res://player.tscn" id="3_k2rto"]
+[ext_resource type="PackedScene" uid="uid://c4o3ysyqcmrhk" path="res://enemy.tscn" id="4_ng6wp"]
+[ext_resource type="PackedScene" uid="uid://b34kccwiw8mn2" path="res://control_panel.tscn" id="5_lfd7x"]
+
+[node name="GameMgr" type="Node2D"]
+script = ExtResource("1_grx8h")
+_mapPrefab = ExtResource("2_y8it7")
+_playerPrefab = ExtResource("3_k2rto")
+_enemyPrefab = ExtResource("4_ng6wp")
+_controlPanelPrefab = ExtResource("5_lfd7x")

@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4o3ysyqcmrhk"]
+
+[ext_resource type="Script" path="res://scripts/Pawn.cs" id="1_01glu"]
+[ext_resource type="Script" path="res://scripts/Hostile.cs" id="2_dxh38"]
+
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("_centerPartSprite", "_topLeftPartSprite", "_topPartSprite", "_topRightPartSprite", "_rightPartSprite", "_bottomRightPartSprite", "_bottomPartSprite", "_bottomLeftPartSprite", "_leftPartSprite")]
+script = ExtResource("1_01glu")
+_centerPartSprite = NodePath("Center")
+_topLeftPartSprite = NodePath("TopLeft")
+_topPartSprite = NodePath("Top")
+_topRightPartSprite = NodePath("TopRight")
+_rightPartSprite = NodePath("Right")
+_bottomRightPartSprite = NodePath("BottomRight")
+_bottomPartSprite = NodePath("Bottom")
+_bottomLeftPartSprite = NodePath("BottomLeft")
+_leftPartSprite = NodePath("Left")
+
+[node name="Center" type="Sprite2D" parent="."]
+
+[node name="TopLeft" type="Sprite2D" parent="."]
+
+[node name="Top" type="Sprite2D" parent="."]
+
+[node name="TopRight" type="Sprite2D" parent="."]
+
+[node name="Right" type="Sprite2D" parent="."]
+
+[node name="BottomRight" type="Sprite2D" parent="."]
+
+[node name="Bottom" type="Sprite2D" parent="."]
+
+[node name="BottomLeft" type="Sprite2D" parent="."]
+
+[node name="Left" type="Sprite2D" parent="."]
+
+[node name="Hostile" type="Node" parent="."]
+script = ExtResource("2_dxh38")

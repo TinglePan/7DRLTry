@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvpy1yk5c1433"]
+
+[ext_resource type="PackedScene" uid="uid://jqohutbsssc8" path="res://game_manager.tscn" id="1_delwd"]
+[ext_resource type="PackedScene" uid="uid://b5e5oc17dntl8" path="res://input_manager.tscn" id="2_yb3ou"]
+
+[node name="Entry" type="Node2D"]
+
+[node name="GameMgr" parent="." instance=ExtResource("1_delwd")]
+
+[node name="InputMgr" parent="." instance=ExtResource("2_yb3ou")]
