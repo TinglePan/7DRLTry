@@ -13,5 +13,13 @@ public static class IdConstants
         MoveDownRight,
         MoveUpLeft,
         MoveDownLeft,
+        RotateClockwise,
+        RotateCounterClockwise,
+    }
+    
+    public enum RotateDirection
+    {
+        Clockwise,
+        CounterClockwise,
     }
 }

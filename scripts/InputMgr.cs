@@ -9,7 +9,7 @@ public struct CommandHandlerArgs
     public ulong HoldTime;
 }
 
-public class InputMgr
+public partial class InputMgr: Node
 {
     private static readonly Dictionary<string, IdConstants.CommandCode> CommandCodeMap = new()
     {
@@ -40,7 +40,7 @@ public class InputMgr
         _holdStartTime = new Dictionary<IdConstants.CommandCode, ulong>();
     }
     
-    public void OnInput(InputEvent @event)
+    public override void _Input(InputEvent @event)
     {
         var currTime = Time.GetTicksMsec();
         foreach (var (eventName, commandCode) in CommandCodeMap)
@@ -56,8 +56,7 @@ public class InputMgr
             }
         }
     }
-
-    public void OnPhysicsProcess(float delta)
+    public override void _PhysicsProcess(double delta)
     {
         var currTime = Time.GetTicksMsec();
         foreach (var (commandCode, holdStartTime) in _holdStartTime)

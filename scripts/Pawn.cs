@@ -13,4 +13,19 @@ public partial class Pawn : Node
 	public override void _Process(double delta)
 	{
 	}
+
+	public void Stall()
+	{
+		
+	}
+
+	public void Move(FlagConstants.Direction dir)
+	{
+		
+	}
+
+	public void Rotate(IdConstants.RotateDirection dir)
+	{
+		
+	}
 }
