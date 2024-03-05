@@ -1,25 +1,24 @@
 ﻿using Godot;
+using Proj7DRL.scripts.data_binding;
 
 namespace Proj7DRL.scripts;
 
-public partial class Hostile: Node, IProvideDirectionalSprite
+public partial class Hostile: Node
 {
-    private Texture2D _placeholderTexture;
+    private Pawn _parent;
+    
+    public int Tier;
     
     public override void _Ready()
     {
-        _placeholderTexture = GD.Load<Texture2D>("res://images/player.png");
+        _parent = GetParent<Pawn>();
     }
-    
-    public Texture2D GetTextureAtDir(FlagConstants.Direction dir)
+
+    public override void _Process(double delta)
     {
-        if (dir == FlagConstants.Direction.Neutral)
+        if (Tier > 0)
         {
-            return _placeholderTexture;
-        }
-        else
-        {
-            return null;
+            _parent.Sprite.Texture = GD.Load<Texture2D>($"res://images/hostile_t{Tier}.png");
         }
     }
 }

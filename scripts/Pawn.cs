@@ -7,17 +7,7 @@ namespace Proj7DRL.scripts;
 
 public partial class Pawn : Node2D
 {
-	[Export] private Sprite2D _centerPartSprite;
-	[Export] private Sprite2D _topLeftPartSprite;
-	[Export] private Sprite2D _topPartSprite;
-	[Export] private Sprite2D _topRightPartSprite;
-	[Export] private Sprite2D _rightPartSprite;
-	[Export] private Sprite2D _bottomRightPartSprite;
-	[Export] private Sprite2D _bottomPartSprite;
-	[Export] private Sprite2D _bottomLeftPartSprite;
-	[Export] private Sprite2D _leftPartSprite;
-
-	private Dictionary<FlagConstants.Direction, Sprite2D> _dir2PartSpriteMap;
+	[Export] public Sprite2D Sprite;
 	
 	private GameMgr _gameMgr;
 	private ObservableProperty<Vector2I> _mapPos;
@@ -25,22 +15,9 @@ public partial class Pawn : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_dir2PartSpriteMap = new()
-		{
-			{ FlagConstants.Direction.UpLeft, _topLeftPartSprite },
-			{ FlagConstants.Direction.Up, _topPartSprite },
-			{ FlagConstants.Direction.UpRight, _topRightPartSprite },
-			{ FlagConstants.Direction.Right, _rightPartSprite },
-			{ FlagConstants.Direction.DownRight, _bottomRightPartSprite },
-			{ FlagConstants.Direction.Down, _bottomPartSprite },
-			{ FlagConstants.Direction.DownLeft, _bottomLeftPartSprite },
-			{ FlagConstants.Direction.Left, _leftPartSprite },
-			{ FlagConstants.Direction.Neutral, _centerPartSprite }
-		};
 		_gameMgr = GetNode<GameMgr>("/root/Entry/GameMgr");
 		_mapPos = new ObservableProperty<Vector2I>("_mapPos", new Vector2I(-1, -1));
 		_mapPos.DetailedValueChanged += OnMapPosChanged;
-		UpdatePartSprites();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -115,23 +92,5 @@ public partial class Pawn : Node2D
 		}
 		var dxy = new Vector2I(x, y);
 		return dxy;
-	}
-
-	private void UpdatePartSprites()
-	{
-		if (GetNodeOrNull<PlayerControl>("PlayerControl") is { } playerControl)
-		{
-			var controlPanel = _gameMgr.ControlPanel;
-			foreach (var (dir, partSprite) in _dir2PartSpriteMap)
-			{
-				partSprite.Texture = controlPanel.GetTextureAtDir(dir);
-			}
-		} else if (GetNodeOrNull<Hostile> ("Hostile") is { } hostile)
-		{
-			foreach (var (dir, partSprite) in _dir2PartSpriteMap)
-			{
-				partSprite.Texture = hostile.GetTextureAtDir(dir);
-			}
-		}
 	}
 }
