@@ -12,6 +12,7 @@ public partial class Map : Node
 	public Tile[,] Tiles;
 
 	private GameMgr _gameMgr;
+	private Control _parent;
 	private List<Vector2I> _posOnBorders;
 	private bool _hasInitialized;
 	
@@ -20,6 +21,8 @@ public partial class Map : Node
 	{
 		Texture2D groundTexture = GD.Load<Texture2D>("res://images/tile_ground.png");
 		_gameMgr = GetNode<GameMgr>("/root/GameMgr");
+		_parent = GetParent<Control>();
+		_parent.Size = new Vector2(Configuration.MapSize * Configuration.TileSize.X, Configuration.MapSize * Configuration.TileSize.Y);
 		_hasInitialized = false;
 		Tiles = new Tile[Configuration.MapSize, Configuration.MapSize];
 		_posOnBorders = new List<Vector2I>();

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8qbn2sxwpn52"]
+
+[ext_resource type="Script" path="res://scripts/Slot.cs" id="1_uwwdl"]
+[ext_resource type="Script" path="res://scripts/Droppable.cs" id="2_bnx17"]
+[ext_resource type="Texture2D" uid="uid://d3rtdno5t6n1o" path="res://images/tile_ground.png" id="2_y30r8"]
+
+[node name="Slot" type="Control" node_paths=PackedStringArray("_droppable")]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_uwwdl")
+_droppable = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_y30r8")
+script = ExtResource("2_bnx17")

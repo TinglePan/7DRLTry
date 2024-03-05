@@ -3,12 +3,15 @@
 [ext_resource type="Script" path="res://scripts/Tile.cs" id="1_2rp4p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qocg0"]
+size = Vector2(24, 24)
 
-[node name="Tile" type="StaticBody2D" node_paths=PackedStringArray("Sprite")]
+[node name="Tile" type="Node2D" node_paths=PackedStringArray("Sprite")]
 script = ExtResource("1_2rp4p")
 Sprite = NodePath("Sprite2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_qocg0")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_qocg0")

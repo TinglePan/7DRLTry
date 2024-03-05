@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvpy1yk5c1433"]
+
+[ext_resource type="PackedScene" uid="uid://bnviyd3psi43d" path="res://map.tscn" id="1_1ws65"]
+[ext_resource type="Theme" uid="uid://4kn875mv162e" path="res://test_theme.tres" id="2_o62u7"]
+[ext_resource type="PackedScene" uid="uid://b34kccwiw8mn2" path="res://control_panel.tscn" id="3_vgcsf"]
+[ext_resource type="PackedScene" uid="uid://nbg2d0y667w5" path="res://backpack.tscn" id="4_rj62q"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GameWindow" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(768, 432)
+layout_mode = 1
+offset_right = 768.0
+offset_bottom = 432.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameWindow"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameWindow/VBoxContainer"]
+layout_mode = 2
+text = "Map
+"
+
+[node name="MapWrapper" type="Control" parent="GameWindow/VBoxContainer"]
+custom_minimum_size = Vector2(360, 360)
+layout_mode = 2
+
+[node name="Map" parent="GameWindow/VBoxContainer/MapWrapper" instance=ExtResource("1_1ws65")]
+
+[node name="MessageWindow" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(768, 216)
+layout_mode = 2
+offset_top = 432.0
+offset_right = 768.0
+offset_bottom = 648.0
+theme = ExtResource("2_o62u7")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ControlPanelWindow" type="CenterContainer" parent="."]
+layout_mode = 1
+offset_left = 768.0
+offset_right = 1152.0
+offset_bottom = 216.0
+
+[node name="ControlPanel" parent="ControlPanelWindow" instance=ExtResource("3_vgcsf")]
+layout_mode = 2
+
+[node name="BackpackWindow" type="CenterContainer" parent="."]
+layout_mode = 2
+offset_left = 768.0
+offset_top = 216.0
+offset_right = 1152.0
+offset_bottom = 432.0
+
+[node name="Backpack" parent="BackpackWindow" instance=ExtResource("4_rj62q")]
+layout_mode = 2
+
+[node name="InspectorWindow" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_left = 768.0
+offset_top = 432.0
+offset_right = 1152.0
+offset_bottom = 648.0

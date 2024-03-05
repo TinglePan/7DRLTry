@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dw1w7pxei7e3n"]
-
-[ext_resource type="Script" path="res://scripts/Pawn.cs" id="1_hd7mb"]
-
-[node name="Pawn" type="Node2D" node_paths=PackedStringArray("Sprite")]
-script = ExtResource("1_hd7mb")
-Sprite = NodePath("Sprite2D")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]

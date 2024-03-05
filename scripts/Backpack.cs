@@ -2,10 +2,12 @@
 
 namespace Proj7DRL.scripts;
 
-public partial class ControlPanel: Control, ICellContainer
+public partial class Backpack: Control, ICellContainer
 {
     [Export]
     private PackedScene _slotPrefab;
+
+    [Export] private PackedScene _itemPrefab;
     [Export]
     private GridContainer _gridContainer;
 
@@ -30,13 +32,25 @@ public partial class ControlPanel: Control, ICellContainer
         }
     }
 
+    public void AddItem(int itemId)
+    {
+        foreach (var slot in _slots)
+        {
+            if (!slot.IsOccupied)
+            {
+                var item = _itemPrefab.Instantiate<Cell>();
+                item.Id = itemId;
+                slot.Fill(item);
+                return;
+            }
+        }
+    }
+
     public void OnAddCell(Cell cell, Slot slot)
     {
-        throw new System.NotImplementedException();
     }
 
     public void OnRemoveCell(Cell cell, Slot slot)
     {
-        throw new System.NotImplementedException();
     }
 }
