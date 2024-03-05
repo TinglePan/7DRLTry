@@ -18,7 +18,8 @@ public partial class Map : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_gameMgr = GetNode<GameMgr>("/root/Entry/GameMgr");
+		Texture2D groundTexture = GD.Load<Texture2D>("res://images/tile_ground.png");
+		_gameMgr = GetNode<GameMgr>("/root/GameMgr");
 		_hasInitialized = false;
 		Tiles = new Tile[Configuration.MapSize, Configuration.MapSize];
 		_posOnBorders = new List<Vector2I>();
@@ -26,8 +27,14 @@ public partial class Map : Node
 		{
 			for (int j = 0; j < Configuration.MapSize; j++)
 			{
-				Tiles[i, j] = _tilePrefab.Instantiate() as Tile;
-				AddChild(Tiles[i, j]);
+				var tile = _tilePrefab.Instantiate() as Tile;
+				if (tile != null)
+				{
+					tile.Sprite.Texture = groundTexture;
+					tile.Position = Utils.MapToWorld(new Vector2I(i, j));
+				}
+				Tiles[i, j] = tile;
+				AddChild(tile);
 				if (i == 0 || i == Configuration.MapSize - 1 || j == 0 || j == Configuration.MapSize - 1)
 				{
 					_posOnBorders.Add(new Vector2I(i, j));

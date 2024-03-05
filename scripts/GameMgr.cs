@@ -54,7 +54,7 @@ public partial class GameMgr : Node
 	public void SpawnEnemyAtMapEdge()
 	{
 		var enemyPawn = _enemyPrefab.Instantiate() as Pawn;
-		var hostile = enemyPawn?.GetNode<Hostile>("Hostile");
+		var hostile = enemyPawn?.GetNode<HostilePawn>("Hostile");
 		if (hostile != null) hostile.Tier = 1;
 		Map.Spawn(enemyPawn, Map.RandomUnoccupiedPosOnBorders());
 	}

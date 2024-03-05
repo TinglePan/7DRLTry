@@ -43,8 +43,8 @@ public partial class PlayerControl : Node
 	{
 		if (!_hasInitialized)
 		{
-			_gameMgr = GetNode("/root/Entry/GameMgr") as GameMgr;
-			_inputMgr = GetNode("/root/Entry/InputMgr") as InputMgr;
+			_gameMgr = GetNode("/root/GameMgr") as GameMgr;
+			_inputMgr = GetNode("/root/InputMgr") as InputMgr;
 			_hasInitialized = true;
 			foreach (var (commandCode, direction) in _commandCode2DirectionMap)
 			{

@@ -15,6 +15,11 @@ run/main_scene="res://entry.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameMgr="*res://game_manager.tscn"
+InputMgr="*res://input_manager.tscn"
+
 [dotnet]
 
 project/assembly_name="Proj7DRL"

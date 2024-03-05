@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4o3ysyqcmrhk"]
+[gd_scene load_steps=4 format=3 uid="uid://c4o3ysyqcmrhk"]
 
 [ext_resource type="Script" path="res://scripts/Pawn.cs" id="1_01glu"]
-[ext_resource type="Script" path="res://scripts/Hostile.cs" id="2_dxh38"]
+[ext_resource type="Script" path="res://scripts/HostilePawn.cs" id="2_xsoc2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcqpn"]
+size = Vector2(16, 16)
 
 [node name="Enemy" type="Node2D" node_paths=PackedStringArray("Sprite")]
 script = ExtResource("1_01glu")
@@ -10,4 +13,9 @@ Sprite = NodePath("Sprite2D")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="Hostile" type="Node" parent="."]
-script = ExtResource("2_dxh38")
+script = ExtResource("2_xsoc2")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_tcqpn")

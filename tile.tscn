@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://bni73rh5ko31b"]
+[gd_scene load_steps=3 format=3 uid="uid://bni73rh5ko31b"]
 
 [ext_resource type="Script" path="res://scripts/Tile.cs" id="1_2rp4p"]
 
-[node name="Tile" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qocg0"]
+
+[node name="Tile" type="StaticBody2D" node_paths=PackedStringArray("Sprite")]
 script = ExtResource("1_2rp4p")
+Sprite = NodePath("Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qocg0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

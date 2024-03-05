@@ -15,7 +15,7 @@ public partial class Pawn : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_gameMgr = GetNode<GameMgr>("/root/Entry/GameMgr");
+		_gameMgr = GetNode<GameMgr>("/root/GameMgr");
 		_mapPos = new ObservableProperty<Vector2I>("_mapPos", new Vector2I(-1, -1));
 		_mapPos.DetailedValueChanged += OnMapPosChanged;
 	}

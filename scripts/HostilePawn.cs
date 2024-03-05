@@ -3,7 +3,7 @@ using Proj7DRL.scripts.data_binding;
 
 namespace Proj7DRL.scripts;
 
-public partial class Hostile: Node
+public partial class HostilePawn: Node
 {
     private Pawn _parent;
     
