@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bnviyd3psi43d" path="res://map.tscn" id="1_1ws65"]
 [ext_resource type="Theme" uid="uid://4kn875mv162e" path="res://test_theme.tres" id="2_o62u7"]
-[ext_resource type="PackedScene" uid="uid://b34kccwiw8mn2" path="res://control_panel.tscn" id="3_vgcsf"]
+[ext_resource type="PackedScene" uid="uid://b34kccwiw8mn2" path="res://ability_panel.tscn" id="3_vgcsf"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -47,13 +47,13 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ControlPanelWindow" type="CenterContainer" parent="."]
+[node name="AbilityPanelWindow" type="CenterContainer" parent="."]
 layout_mode = 1
 offset_left = 768.0
 offset_right = 1152.0
 offset_bottom = 324.0
 
-[node name="ControlPanel" parent="ControlPanelWindow" instance=ExtResource("3_vgcsf")]
+[node name="AbilityPanel" parent="AbilityPanelWindow" instance=ExtResource("3_vgcsf")]
 layout_mode = 2
 
 [node name="InspectorWindow" type="MarginContainer" parent="."]

@@ -22,11 +22,12 @@ public partial class Slot : Control, IDropCell
         Container.OnAddCell(cell);
     }
     
-    public void Clear(Cell cell)
+    public void Clear()
     {
+        var cell = Content;
         Content = null;
         cell.CurrentSlot = null;
-        RemoveChild(cell);
+        RemoveChild(Content);
         Container.OnRemoveCell(cell, this);
     }
 

@@ -9,15 +9,15 @@ public partial class Pawn : Node2D
 {
 	[Export] public Sprite2D Sprite;
 	
-	private GameMgr _gameMgr;
-	private ObservableProperty<Vector2I> _mapPos;
+	protected GameMgr GameMgr;
+	protected ObservableProperty<Vector2I> MapPos;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_gameMgr = GetNode<GameMgr>("/root/GameMgr");
-		_mapPos = new ObservableProperty<Vector2I>("_mapPos", new Vector2I(-1, -1));
-		_mapPos.DetailedValueChanged += OnMapPosChanged;
+		GameMgr = GetNode<GameMgr>("/root/GameMgr");
+		MapPos = new ObservableProperty<Vector2I>("_mapPos", new Vector2I(-1, -1));
+		MapPos.DetailedValueChanged += OnMapPosChanged;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,25 +27,31 @@ public partial class Pawn : Node2D
 
 	public void Stall()
 	{
-		_gameMgr.PlayerTurnEnd();
+		GameMgr.PlayerTurnEnd();
 	}
 
 	public void MoveByDir(FlagConstants.Direction dir)
 	{
-		var toPos = _mapPos.Value + Dir2Dxy(dir);
+		var toPos = MapPos.Value + Dir2Dxy(dir);
 		SetPos(toPos);
-		_gameMgr.PlayerTurnEnd();
+		GameMgr.PlayerTurnEnd();
 	}
 
 	public void SetPos(Vector2I toPos)
 	{
-		if (!_gameMgr.Map.IsPosInBound(toPos)) return;
-		_mapPos.Value = toPos;
+		if (!GameMgr.Map.IsPosInBound(toPos)) return;
+		MapPos.Value = toPos;
 	}
 
 	public void Rotate(IdConstants.RotateDirection dir)
 	{
 		
+	}
+
+	public void OnBodyEntered(Node2D body)
+	{
+		GD.Print("hit");
+		GD.Print("body");
 	}
 
 	private void OnMapPosChanged(object sender, ValueChangedEventDetailedArgs<Vector2I> args)
@@ -55,7 +61,7 @@ public partial class Pawn : Node2D
 		Position = worldPos;
 	}
 
-	private Vector2I Dir2Dxy(FlagConstants.Direction dir)
+	protected Vector2I Dir2Dxy(FlagConstants.Direction dir)
 	{
 		int x, y;
 		switch (dir & (FlagConstants.Direction.Down | FlagConstants.Direction.Up))
@@ -92,5 +98,26 @@ public partial class Pawn : Node2D
 		}
 		var dxy = new Vector2I(x, y);
 		return dxy;
+	}
+
+	protected FlagConstants.Direction Dxy2Dir(Vector2I dxy)
+	{
+		FlagConstants.Direction dir = 0;
+		if (dxy.X > 0)
+		{
+			dir |= FlagConstants.Direction.Right;
+		}
+		else if (dxy.X < 0)
+		{
+			dir |= FlagConstants.Direction.Left;
+		}
+		if (dxy.Y > 0)
+		{
+			dir |= FlagConstants.Direction.Up;
+		} else if (dxy.Y < 0)
+		{
+			dir |= FlagConstants.Direction.Down;
+		}
+		return dir;
 	}
 }

@@ -9,14 +9,15 @@ public partial class Cell : Control
 	public Slot CurrentSlot;
 	
 	public int Id;
-	public string DisplayName { get; private set; }
+
+	private CellDef _def;
+	public string DisplayName => _def.DisplayName;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		var cellDef = CellDefs.GetCellDef(Id);
-		DisplayName = cellDef.DisplayName;
-		_draggable.Texture = GD.Load<Texture2D>(cellDef.IconPath);
+		_def = CellDefs.GetCellDef(Id);
+		_draggable.Texture = GD.Load<Texture2D>(_def.IconPath);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -56,7 +56,7 @@ public partial class Map : Node
 		return pos.X is >= 0 and < Configuration.MapSize && pos.Y is >= 0 and < Configuration.MapSize;
 	}
 
-	public void Spawn(Pawn pawn, Vector2I pos)
+	public void SpawnPawn(Pawn pawn, Vector2I pos)
 	{
 		AddChild(pawn);
 		pawn.SetPos(pos);

@@ -7,11 +7,14 @@ public partial class GameMgr : Node
 {
 	[Export] private PackedScene _playerPrefab;
 	[Export] private PackedScene _enemyPrefab;
+	[Export] private PackedScene _bulletPrefab;
+	[Export] private PackedScene _laserPrefab;
 
-	public bool Started;
 	public Map Map;
-	public Pawn PlayerPawn;
-	public ControlPanel ControlPanel;
+	public PlayerPawn PlayerPawn;
+	public AbilityPanel AbilityPanel;
+	
+	public bool Started;
 	public int TurnCount { get; private set; }
 	public Random Rand;
 	
@@ -35,11 +38,10 @@ public partial class GameMgr : Node
 	public void Start()
 	{
 		TurnCount = 0;
-		ControlPanel = GetNode<ControlPanel>("/root/Main/ControlPanelWindow/ControlPanel");
+		AbilityPanel = GetNode<AbilityPanel>("/root/Main/ControlPanelWindow/ControlPanel");
 		Map = GetNode<Map>("/root/Main/GameWindow/VBoxContainer/MapWrapper/Map");
-		PlayerPawn = _playerPrefab.Instantiate() as Pawn;
-		Map?.Spawn(PlayerPawn, Configuration.PlayerStartPos);
-		ControlPanel.AddItem(0);
+		PlayerPawn = _playerPrefab.Instantiate() as PlayerPawn;
+		Map?.SpawnPawn(PlayerPawn, Configuration.PlayerStartPos);
 	}
 
 	public void PlayerTurnEnd()
@@ -50,10 +52,9 @@ public partial class GameMgr : Node
 
 	public void SpawnEnemyAtMapEdge()
 	{
-		var enemyPawn = _enemyPrefab.Instantiate() as Pawn;
-		var hostile = enemyPawn?.GetNode<HostilePawn>("Hostile");
-		if (hostile != null) hostile.Tier = 1;
-		Map.Spawn(enemyPawn, Map.RandomUnoccupiedPosOnBorders());
+		var enemyPawn = _enemyPrefab.Instantiate() as HostilePawn;
+		if (enemyPawn != null) enemyPawn.Tier.Value = 1;
+		Map.SpawnPawn(enemyPawn, Map.RandomUnoccupiedPosOnBorders());
 	}
 	
 	public int RandomInt(int max, int min=0)
@@ -77,5 +78,4 @@ public partial class GameMgr : Node
 			}
 		}
 	}
-	
 }

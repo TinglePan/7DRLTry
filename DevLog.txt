@@ -7,3 +7,8 @@ Actually did: Basic character control. A plain map. Stub enemies with only place
 
 Day2:
 Plan to do: Add control panel, the core of the game. It is a grid of cells, containing unit tiles. Units provides functionality. Some units are directional. The control panel should be able to rotate. Messing around with the control panel should be like layout management. I wish I could add those fancy things that appeals me in layout management, such as chemical reactions, pipelines, tower defense, or Luck be a Landlord things? But I won't have that time to do all those things. So drag and drop cells first. Then add a similar backpack panel to hold units that can be placed into the control panel. Maybe i will focus on tower defense this time.
+Actually did: Got drag and drop almost done.
+
+Day3:
+Plan to do: Get drag and drop done. Add some attack.
+Actually did: Removed all control panel things after realizing it's a bit too complicated for me to take care of in only 4 days left. I should focus on getting a playable thing first. I decided to replace the control panel with an ability panel, which exists only for showing what ability the player has gotten. The attack is also changed to some auto attack things just like those survivor games. Whenever the player moves, he automatically makes some attack, either shoot something or perform melee attack, based on what he has got in his ability panel. Let me start by making a simple bullet shooter first.
