@@ -12,7 +12,6 @@ public partial class GameMgr : Node
 	public Map Map;
 	public Pawn PlayerPawn;
 	public ControlPanel ControlPanel;
-	public Backpack Backpack;
 	public int TurnCount { get; private set; }
 	public Random Rand;
 	
@@ -37,11 +36,10 @@ public partial class GameMgr : Node
 	{
 		TurnCount = 0;
 		ControlPanel = GetNode<ControlPanel>("/root/Main/ControlPanelWindow/ControlPanel");
-		Backpack = GetNode<Backpack>("/root/Main/BackpackWindow/Backpack");
 		Map = GetNode<Map>("/root/Main/GameWindow/VBoxContainer/MapWrapper/Map");
 		PlayerPawn = _playerPrefab.Instantiate() as Pawn;
 		Map?.Spawn(PlayerPawn, Configuration.PlayerStartPos);
-		Backpack.AddItem(0);
+		ControlPanel.AddItem(0);
 	}
 
 	public void PlayerTurnEnd()

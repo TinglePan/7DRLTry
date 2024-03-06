@@ -30,13 +30,28 @@ public partial class ControlPanel: Control, ICellContainer
         }
     }
 
-    public void OnAddCell(Cell cell, Slot slot)
+    public void AddItem(int itemId)
     {
-        throw new System.NotImplementedException();
+        var itemPrefab = GD.Load<PackedScene>("res://cell.tscn");
+        var item = itemPrefab.Instantiate<Cell>();
+        item.Id = itemId;
+        foreach (var slot in _slots)
+        {
+            if (!slot.IsOccupied)
+            {
+                slot.Fill(item);
+                return;
+            }
+        }
+    }
+    
+    public void OnAddCell(Cell cell)
+    {
+        
     }
 
     public void OnRemoveCell(Cell cell, Slot slot)
     {
-        throw new System.NotImplementedException();
+        
     }
 }

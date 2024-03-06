@@ -2,9 +2,11 @@ using Godot;
 
 namespace Proj7DRL.scripts;
 
-public partial class Droppable : TextureRect
+public partial class DropArea : TextureRect
 {
+    [Export]
     private Slot _slot;
+    
     private bool _hovered;
 
     public override bool _CanDropData(Vector2 atPosition, Variant data)
@@ -30,7 +32,7 @@ public partial class Droppable : TextureRect
     public override void _DropData(Vector2 atPosition, Variant data)
     {
         var cell = data.As<Cell>();
-        _slot.MoveContent(cell.CurrentSlot);
+        _slot.DropCell(cell);
 
         SelfModulate = Colors.White;
         _hovered = false;
@@ -39,7 +41,6 @@ public partial class Droppable : TextureRect
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        _slot = GetParent<Slot>();
         MouseExited += () =>
         {
             //If mouse exit this item after being hovered while dragging, then reset the color

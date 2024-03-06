@@ -30,6 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="VBoxContainer"]
+texture_filter = 1
 layout_mode = 2
 text = "Control Panel"
 

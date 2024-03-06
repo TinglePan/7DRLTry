@@ -5,7 +5,7 @@ namespace Proj7DRL.scripts;
 public partial class Cell : Control
 {
 	[Export]
-	private Draggable _draggable;
+	private DragArea _draggable;
 	public Slot CurrentSlot;
 	
 	public int Id;

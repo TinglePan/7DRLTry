@@ -2,10 +2,10 @@ using Godot;
 
 namespace Proj7DRL.scripts;
 
-public partial class Slot : Control
+public partial class Slot : Control, IDropCell
 {
     [Export]
-    private Droppable _droppable;
+    private DropArea _dropArea;
 
     public ICellContainer Container;
 
@@ -19,26 +19,29 @@ public partial class Slot : Control
         Content = cell;
         cell.CurrentSlot = this;
         AddChild(cell);
-        Container.OnAddCell(cell, this);
+        Container.OnAddCell(cell);
     }
     
     public void Clear(Cell cell)
     {
         Content = null;
+        cell.CurrentSlot = null;
         RemoveChild(cell);
         Container.OnRemoveCell(cell, this);
     }
 
-    public void MoveContent(Slot from)
+    public void DropCell(Cell cell)
     {
-        if (!from.IsOccupied) return;
-        var fromContainer = from.Container;
-        var movedContent = from.Content;
-        Content = movedContent;
-        movedContent.CurrentSlot = this;
-        from.Content = null;
-        movedContent.Reparent(this, false);
-        fromContainer.OnRemoveCell(movedContent, from);
-        Container.OnAddCell(movedContent, this);
+        var fromSlot = cell.CurrentSlot;
+        Content = cell;
+        Content.CurrentSlot = this;
+        Container.OnAddCell(Content);
+        if (fromSlot != null)
+        {
+            var fromContainer = fromSlot.Container;
+            Content.Reparent(this, false);
+            fromSlot.Content = null;
+            fromContainer.OnRemoveCell(cell, fromSlot);
+        }
     }
 }

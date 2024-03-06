@@ -3,11 +3,12 @@ using Godot;
 
 namespace Proj7DRL.scripts;
 
-public partial class Draggable : TextureRect
+public partial class DragArea : TextureRect
 {
-	public bool IsDraggable;
-
+	[Export]
 	public Cell Cell;
+	
+	public bool IsDraggable;
 
 	public override Variant _GetDragData(Vector2 atPosition)
 	{
@@ -24,13 +25,12 @@ public partial class Draggable : TextureRect
 		//OPTIONAL: Since we are creating a duplicate, disable the visibility on this until dragging has completed
 		Visible = false;
 
-		return this;
+		return Cell;
 	}
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Cell = GetParent<Cell>();
 		// MouseDefaultCursorShape = CursorShape.Drag;
 		IsDraggable = true;
 	}

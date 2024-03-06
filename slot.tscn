@@ -1,19 +1,22 @@
 [gd_scene load_steps=4 format=3 uid="uid://b8qbn2sxwpn52"]
 
 [ext_resource type="Script" path="res://scripts/Slot.cs" id="1_uwwdl"]
-[ext_resource type="Script" path="res://scripts/Droppable.cs" id="2_bnx17"]
 [ext_resource type="Texture2D" uid="uid://d3rtdno5t6n1o" path="res://images/tile_ground.png" id="2_y30r8"]
+[ext_resource type="Script" path="res://scripts/DropArea.cs" id="3_xvbde"]
 
-[node name="Slot" type="Control" node_paths=PackedStringArray("_droppable")]
+[node name="Slot" type="Control" node_paths=PackedStringArray("_dropArea")]
 texture_filter = 1
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_uwwdl")
-_droppable = NodePath("TextureRect")
+_dropArea = NodePath("TextureRect")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="TextureRect" type="TextureRect" parent="." node_paths=PackedStringArray("_slot")]
+layout_mode = 2
+offset_right = 24.0
+offset_bottom = 24.0
 texture = ExtResource("2_y30r8")
-script = ExtResource("2_bnx17")
+stretch_mode = 2
+script = ExtResource("3_xvbde")
+_slot = NodePath("..")
