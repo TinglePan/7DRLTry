@@ -2,14 +2,17 @@ using Godot;
 
 namespace Proj7DRL.scripts;
 
-public partial class Tile : Node2D
+public partial class DbgRaycastDraw : Node2D
 {
-	[Export] public Sprite2D Sprite;
-	[Export] public Area2D Collider;
+	
+	public Vector2 Start;
+	public Vector2 End;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Start = Vector2.Zero;
+		End = Vector2.Zero;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -17,14 +20,9 @@ public partial class Tile : Node2D
 	{
 	}
 
-	public bool IsOccupied()
+	public override void _Draw()
 	{
-		return false;
-	}
-
-	public void OnAreaEntered(Area2D area)
-	{
-		GD.Print("OnAreaEntered Tile");
-		area.EmitSignal("area_entered", Collider);
+		if (Start == End) return;
+		DrawLine(Start, End, Colors.Red);
 	}
 }

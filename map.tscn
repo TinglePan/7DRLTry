@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnviyd3psi43d"]
+[gd_scene load_steps=5 format=3 uid="uid://bnviyd3psi43d"]
 
 [ext_resource type="Script" path="res://scripts/Map.cs" id="1_o54fx"]
 [ext_resource type="PackedScene" uid="uid://bni73rh5ko31b" path="res://tile.tscn" id="2_gappt"]
+[ext_resource type="Script" path="res://scripts/DbgRaycastDraw.cs" id="3_kup16"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v5mqc"]
 
@@ -17,5 +18,9 @@ collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapBB"]
 shape = SubResource("RectangleShape2D_v5mqc")
+
+[node name="Node2D" type="Node2D" parent="."]
+z_index = 1
+script = ExtResource("3_kup16")
 
 [connection signal="area_exited" from="MapBB" to="." method="OnAreaExited"]

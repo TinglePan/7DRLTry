@@ -43,7 +43,6 @@ public partial class Map : Node
 				AddChild(tile);
 				if (i == 0 || i == Configuration.MapSize - 1 || j == 0 || j == Configuration.MapSize - 1)
 				{
-					if (tile != null) tile.Collider.ProcessMode = ProcessModeEnum.Always;
 					_posOnBorders.Add(new Vector2I(i, j));
 				}
 			}
