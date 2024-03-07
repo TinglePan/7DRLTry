@@ -10,14 +10,6 @@ public partial class Pawn : Node2D
 {
 	[Export] public Area2D Collider;
 	[Export] public Sprite2D Sprite;
-	[Export] public RayCast2D RayUp;
-	[Export] public RayCast2D RayDown;
-	[Export] public RayCast2D RayLeft;
-	[Export] public RayCast2D RayRight;
-	[Export] public RayCast2D RayUpLeft;
-	[Export] public RayCast2D RayUpRight;
-	[Export] public RayCast2D RayDownLeft;
-	[Export] public RayCast2D RayDownRight;
 	
 	protected GameMgr GameMgr;
 	protected ObservableProperty<Vector2I> MapPos;
@@ -129,35 +121,19 @@ public partial class Pawn : Node2D
 
 	public bool CollisionTest(FlagConstants.Direction dir)
 	{
-		RayCast2D ray = null; 
-		switch (dir)
+		var mask = Collider.CollisionMask;
+		var spaceState = GetWorld2D().DirectSpaceState;
+		var worldDxy = Dir2Dxy(dir) * Configuration.TileSize;
+		var globalTransform = GetGlobalTransform();
+		// NOTE: Xform is not exposed?
+		var to = globalTransform.BasisXform(worldDxy) + globalTransform.Origin;
+		var query = PhysicsRayQueryParameters2D.Create(globalTransform.Origin, to, mask, new Array<Rid>
 		{
-			case FlagConstants.Direction.Down:
-				ray = RayDown;
-				break;
-			case FlagConstants.Direction.Right:
-				ray = RayRight;
-				break;
-			case FlagConstants.Direction.Up:
-				ray = RayUp;
-				break;
-			case FlagConstants.Direction.Left:
-				ray = RayLeft;
-				break;
-			case FlagConstants.Direction.UpRight:
-				ray = RayUpRight;
-				break;
-			case FlagConstants.Direction.UpLeft:
-				ray = RayUpLeft;
-				break;
-			case FlagConstants.Direction.DownLeft:
-				ray = RayDownLeft;
-				break;
-			case FlagConstants.Direction.DownRight:
-				ray = RayDownRight;
-				break;
-		}
-
-		return ray?.GetCollider() == null;
+			Collider.GetRid()
+		});
+		// Ouch.
+		query.CollideWithAreas = true;
+		var res = spaceState.IntersectRay(query);
+		return res.Count == 0;
 	}
 }
