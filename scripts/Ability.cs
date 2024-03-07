@@ -24,12 +24,18 @@ public class Ability
     {
     }
 
-    public virtual void OnTurnEnd()
+    public virtual void OnMove()
     {
     }
 
-    public virtual void OnMove()
+    public virtual void OnStall()
     {
+        
+    }
+
+    public virtual void OnRotate()
+    {
+        
     }
 
     public virtual void OnHit()

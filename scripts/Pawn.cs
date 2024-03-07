@@ -27,12 +27,12 @@ public partial class Pawn : Node2D
 	{
 	}
 
-	public void Stall()
+	public virtual void Stall()
 	{
 		GameMgr.PlayerTurnEnd();
 	}
 
-	public void MoveByDir(FlagConstants.Direction dir)
+	public virtual void MoveByDir(FlagConstants.Direction dir)
 	{
 		if (!CollisionTest(dir)) return;
 		var toPos = MapPos.Value + Dir2Dxy(dir);

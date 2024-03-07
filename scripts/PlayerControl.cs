@@ -19,10 +19,10 @@ public partial class PlayerControl : Node
 		{ IdConstants.CommandCode.MoveDownLeft, FlagConstants.Direction.DownLeft },
 	};
 	
-	private static Dictionary<IdConstants.CommandCode, IdConstants.RotateDirection> _commandCode2RotateDirectionMap = new()
+	private static Dictionary<IdConstants.CommandCode, ClockDirection> _commandCode2RotateDirectionMap = new()
 	{
-		{ IdConstants.CommandCode.RotateClockwise, IdConstants.RotateDirection.Clockwise },
-		{ IdConstants.CommandCode.RotateCounterClockwise, IdConstants.RotateDirection.CounterClockwise },
+		{ IdConstants.CommandCode.RotateClockwise, ClockDirection.Clockwise },
+		{ IdConstants.CommandCode.RotateCounterClockwise, ClockDirection.Counterclockwise },
 	};
 	
 	private bool _hasInitialized = false;
@@ -70,7 +70,6 @@ public partial class PlayerControl : Node
 		else
 		{
 			_parent.MoveByDir(direction);
-			_gameMgr.AbilityPanel.OnPlayerMove();
 		}
 	}
 

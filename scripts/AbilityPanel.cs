@@ -51,4 +51,20 @@ public partial class AbilityPanel: Control
             ability.OnMove();
         }
     }
+    
+    public void OnPlayerRotate()
+    {
+        foreach (var ability in _abilities)
+        {
+            ability.OnRotate();
+        }
+    }
+
+    public void OnPlayerStall()
+    {
+        foreach (var ability in _abilities)
+        {
+            ability.OnStall();
+        }
+    }
 }

@@ -19,9 +19,10 @@ public partial class Projectile: Node2D
     
     private List<Pawn> _hitPawns = new List<Pawn>();
 
-    public void Setup(Vector2 pos, Vector2 dir, int power)
+    public void Setup(Vector2 pos, float rotationDegrees, Vector2 dir, int power)
     {
         Position = pos;
+        RotationDegrees = rotationDegrees;
         _dir = dir;
         Power = power;
     }

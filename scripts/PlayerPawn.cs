@@ -18,9 +18,27 @@ public partial class PlayerPawn: Pawn
         Power = 1;
         Speed = 1;
     }
-    
-    public void Rotate(IdConstants.RotateDirection dir)
+
+    public override void Stall()
     {
+        GameMgr.AbilityPanel.OnPlayerStall();
+        base.Stall();
+    }
+
+    public override void MoveByDir(FlagConstants.Direction dir)
+    {
+        if (!CollisionTest(dir)) return;
+        var toPos = MapPos.Value + Dir2Dxy(dir);
+        SetPos(toPos);
+        GameMgr.AbilityPanel.OnPlayerMove();
+        GameMgr.PlayerTurnEnd();
+    }
+
+    public void Rotate(ClockDirection dir)
+    {
+        FaceDirection = Utils.RotateDirByClockDir(FaceDirection, dir);
+        RotationDegrees = Utils.Dir2Angle(FaceDirection);
+        GameMgr.AbilityPanel.OnPlayerRotate();
 		GameMgr.PlayerTurnEnd();
     }
     
@@ -28,11 +46,10 @@ public partial class PlayerPawn: Pawn
     {
         foreach (var direction in directions)
         {
-            var faceDirVector = Dir2Dxy(FaceDirection);
-            var relativeDirVector = Dir2Dxy(direction);
-            var shootDirVector = Utils.RotateDirVectorByDirVector(faceDirVector, relativeDirVector);
+            var shootDir = Utils.RotateDirByDir(FaceDirection, direction);
+            var shootDirVector = Dir2Dxy(shootDir);
             var bullet = _bulletPrefab.Instantiate<Projectile>();
-            bullet.Setup(Position, shootDirVector, power);
+            bullet.Setup(Position, RotationDegrees, shootDirVector, power);
             bullet.Collider.SetCollisionLayerValue(3, true);
             bullet.Collider.SetCollisionMaskValue(2, true);
             GameMgr.Map.AddChild(bullet);

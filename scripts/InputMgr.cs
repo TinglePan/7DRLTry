@@ -17,10 +17,10 @@ public partial class InputMgr: Node
     private static readonly Dictionary<string, IdConstants.CommandCode> CommandCodeMap = new()
     {
         {"Stall", IdConstants.CommandCode.Stall},
-        {"MoveUpLeft", IdConstants.CommandCode.MoveUpLeft},
-        {"MoveUpRight", IdConstants.CommandCode.MoveUpRight},
-        {"MoveDownLeft", IdConstants.CommandCode.MoveDownLeft},
-        {"MoveDownRight", IdConstants.CommandCode.MoveDownRight},
+        // {"MoveUpLeft", IdConstants.CommandCode.MoveUpLeft},
+        // {"MoveUpRight", IdConstants.CommandCode.MoveUpRight},
+        // {"MoveDownLeft", IdConstants.CommandCode.MoveDownLeft},
+        // {"MoveDownRight", IdConstants.CommandCode.MoveDownRight},
         {"MoveRight", IdConstants.CommandCode.MoveRight},
         {"MoveLeft", IdConstants.CommandCode.MoveLeft},
         {"MoveUp", IdConstants.CommandCode.MoveUp},

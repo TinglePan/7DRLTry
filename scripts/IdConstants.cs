@@ -16,10 +16,4 @@ public static class IdConstants
         RotateClockwise,
         RotateCounterClockwise,
     }
-    
-    public enum RotateDirection
-    {
-        Clockwise,
-        CounterClockwise,
-    }
 }
