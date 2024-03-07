@@ -123,10 +123,9 @@ public partial class Pawn : Node2D
 	{
 		var mask = Collider.CollisionMask;
 		var spaceState = GetWorld2D().DirectSpaceState;
-		var worldDxy = Dir2Dxy(dir) * Configuration.TileSize;
+		Vector2 worldDxy = Dir2Dxy(dir) * Configuration.TileSize;
 		var globalTransform = GetGlobalTransform();
-		// NOTE: Xform is not exposed?
-		var to = globalTransform.BasisXform(worldDxy) + globalTransform.Origin;
+		var to = worldDxy + globalTransform.Origin;
 		var query = PhysicsRayQueryParameters2D.Create(globalTransform.Origin, to, mask, new Array<Rid>
 		{
 			Collider.GetRid()
