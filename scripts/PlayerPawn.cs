@@ -14,6 +14,7 @@ public partial class PlayerPawn: Pawn
     public override void _Ready()
     {
         base._Ready();
+        FaceDirection = FlagConstants.Direction.Up;
         Power = 1;
         Speed = 1;
     }

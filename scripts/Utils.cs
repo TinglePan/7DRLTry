@@ -16,10 +16,6 @@ public static class Utils
     
     public static Vector2I RotateDirVectorByDirVector(Vector2I dirVector, Vector2I rotateVector)
     {
-        if (Configuration.StartAtTopLeft)
-        {
-            rotateVector = new Vector2I(rotateVector.X, -rotateVector.Y);
-        }
         double angle = Mathf.Atan2(rotateVector.Y, rotateVector.X) - Mathf.Atan2(dirVector.Y, dirVector.X);
 
         // Ensure the angle is within the range [-π, π]
@@ -29,6 +25,6 @@ public static class Utils
             angle -= 2 * Mathf.Pi;
         double x = dirVector.X * Mathf.Cos(angle) - dirVector.Y * Mathf.Sin(angle);
         double y = dirVector.X * Mathf.Sin(angle) + dirVector.Y * Mathf.Cos(angle);
-        return new Vector2I((int)x, (int)y);
+        return new Vector2I(Mathf.RoundToInt(x), Mathf.RoundToInt(y));
     }
 }

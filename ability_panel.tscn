@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b34kccwiw8mn2"]
+[gd_scene load_steps=7 format=3 uid="uid://b34kccwiw8mn2"]
 
 [ext_resource type="Script" path="res://scripts/AbilityPanel.cs" id="1_fytho"]
 [ext_resource type="Script" path="res://scripts/Slot.cs" id="2_u2e5c"]
 [ext_resource type="Texture2D" uid="uid://d3rtdno5t6n1o" path="res://images/tile_ground.png" id="3_6m3cl"]
 [ext_resource type="Script" path="res://scripts/DropArea.cs" id="4_4ts4u"]
+[ext_resource type="PackedScene" uid="uid://bkh4gvastuare" path="res://ability_icon.tscn" id="5_s3xg3"]
 
 [sub_resource type="PackedScene" id="PackedScene_qr0w1"]
 _bundled = {
@@ -18,7 +19,7 @@ _bundled = {
 "version": 3
 }
 
-[node name="ControlPanel" type="Control" node_paths=PackedStringArray("_gridContainer")]
+[node name="AbilityPanel" type="Control" node_paths=PackedStringArray("_gridContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,6 +28,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fytho")
 _slotPrefab = SubResource("PackedScene_qr0w1")
+_iconPrefab = ExtResource("5_s3xg3")
 _gridContainer = NodePath("VBoxContainer/GridContainer")
 _columns = 7
 
@@ -43,6 +45,10 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Abilities"
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2

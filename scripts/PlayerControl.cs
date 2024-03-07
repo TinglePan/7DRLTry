@@ -70,6 +70,7 @@ public partial class PlayerControl : Node
 		else
 		{
 			_parent.MoveByDir(direction);
+			_gameMgr.AbilityPanel.OnPlayerMove();
 		}
 	}
 

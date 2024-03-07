@@ -15,6 +15,7 @@ public static class AbilityDefs
                 DisplayName = "Test shoot ability",
                 Description = "Test shoot ability description",
                 IconPath = "res://images/ability_bullet_shooter_front.png",
+                Type = "ShootBulletAbility",
                 Args = new Dictionary()
                 {
                     {"power", "1"},

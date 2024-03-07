@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhgrpmfqfcob8"]
+[gd_scene load_steps=4 format=3 uid="uid://bhgrpmfqfcob8"]
 
 [ext_resource type="Script" path="res://scripts/Projectile.cs" id="1_en6qg"]
+[ext_resource type="Texture2D" uid="uid://cm1muqle2gp31" path="res://images/bullet.png" id="2_bud7l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pi5f3"]
 
 [node name="Bullet" type="Node2D" node_paths=PackedStringArray("Collider")]
 script = ExtResource("1_en6qg")
 Collider = NodePath("Area2D")
+_speed = 100.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_bud7l")
 
 [node name="Area2D" type="Area2D" parent="."]
 

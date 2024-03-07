@@ -26,11 +26,29 @@ public partial class AbilityPanel: Control
     
     public void AddAbility(int id)
     {
-        var ability = new Ability(id, _gameMgr);
+        var def = AbilityDefs.GetDef(id);
+        Ability ability;
+        switch (def.Type)
+        {
+            case "ShootBulletAbility":
+                ability = new ShootBulletAbility(id, _gameMgr);
+                break;
+            default:
+                ability = new Ability(id, _gameMgr);
+                break;
+        }
         _abilities.Add(ability);
         ability.OnGetAbility();
         var icon = _iconPrefab.Instantiate<AbilityIcon>();
         icon.Texture = GD.Load<Texture2D>(ability.IconPath);
         _gridContainer.AddChild(icon);
+    }
+
+    public void OnPlayerMove()
+    {
+        foreach (var ability in _abilities)
+        {
+            ability.OnMove();
+        }
     }
 }

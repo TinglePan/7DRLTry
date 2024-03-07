@@ -38,10 +38,12 @@ public partial class GameMgr : Node
 	public void Start()
 	{
 		TurnCount = 0;
-		AbilityPanel = GetNode<AbilityPanel>("/root/Main/ControlPanelWindow/ControlPanel");
+		AbilityPanel = GetNode<AbilityPanel>("/root/Main/AbilityPanelWindow/AbilityPanel");
 		Map = GetNode<Map>("/root/Main/GameWindow/VBoxContainer/MapWrapper/Map");
 		PlayerPawn = _playerPrefab.Instantiate() as PlayerPawn;
 		Map?.SpawnPawn(PlayerPawn, Configuration.PlayerStartPos);
+		
+		AbilityPanel.AddAbility(0);
 	}
 
 	public void PlayerTurnEnd()
@@ -53,8 +55,8 @@ public partial class GameMgr : Node
 	public void SpawnEnemyAtMapEdge()
 	{
 		var enemyPawn = _enemyPrefab.Instantiate() as HostilePawn;
-		if (enemyPawn != null) enemyPawn.Tier.Value = 1;
 		Map.SpawnPawn(enemyPawn, Map.RandomUnoccupiedPosOnBorders());
+		if (enemyPawn != null) enemyPawn.Tier.Value = 1;
 	}
 	
 	public int RandomInt(int max, int min=0)
