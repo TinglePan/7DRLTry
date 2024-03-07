@@ -34,6 +34,19 @@ public partial class Projectile: Node2D
     
     public void OnAreaEntered(Area2D area)
     {
-        QueueFree();
+        GD.Print("OnAreaEnter Projectile");
+        if (area.Name != "MapBB")
+        {
+            QueueFree();
+        }
+    }
+
+    public void OnAreaExited(Area2D area)
+    {
+        GD.Print("OnAreaExited Projectile");
+        if (area.Name == "MapBB")
+        {
+            QueueFree();
+        }
     }
 }

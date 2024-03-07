@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
 using Proj7DRL.scripts.data_binding;
 
 namespace Proj7DRL.scripts;
 
 public partial class Pawn : Node2D
 {
+	[Export] public Area2D Collider;
 	[Export] public Sprite2D Sprite;
 	
 	protected GameMgr GameMgr;
@@ -32,6 +34,7 @@ public partial class Pawn : Node2D
 
 	public void MoveByDir(FlagConstants.Direction dir)
 	{
+		if (!CollisionTest(dir)) return;
 		var toPos = MapPos.Value + Dir2Dxy(dir);
 		SetPos(toPos);
 		GameMgr.PlayerTurnEnd();
@@ -41,11 +44,6 @@ public partial class Pawn : Node2D
 	{
 		if (!GameMgr.Map.IsPosInBound(toPos)) return;
 		MapPos.Value = toPos;
-	}
-
-	public void Rotate(IdConstants.RotateDirection dir)
-	{
-		
 	}
 
 	public void OnBodyEntered(Node2D body)
@@ -119,5 +117,18 @@ public partial class Pawn : Node2D
 			dir |= FlagConstants.Direction.Down;
 		}
 		return dir;
+	}
+
+	public bool CollisionTest(FlagConstants.Direction dir)
+	{
+		var mask = Collider.CollisionMask;
+		var spaceState = GetWorld2D().DirectSpaceState;
+		var toPosition = Utils.MapToWorld(MapPos.Value + Dir2Dxy(dir));
+		var query = PhysicsRayQueryParameters2D.Create(Position, toPosition, mask, new Array<Rid>
+		{
+			Collider.GetRid()
+		});
+		var res = spaceState.IntersectRay(query);
+		return res.Count == 0;
 	}
 }

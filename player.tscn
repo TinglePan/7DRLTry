@@ -8,9 +8,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_caliy"]
 size = Vector2(16, 16)
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("Sprite")]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("Collider", "Sprite")]
 script = ExtResource("1_om3ho")
 _bulletPrefab = ExtResource("2_bgl0p")
+Collider = NodePath("Area2D")
 Sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -20,7 +21,7 @@ texture = ExtResource("2_f41i1")
 script = ExtResource("2_n4bpb")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_mask = 19
+collision_mask = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_caliy")

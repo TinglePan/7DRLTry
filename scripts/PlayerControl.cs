@@ -27,7 +27,7 @@ public partial class PlayerControl : Node
 	
 	private bool _hasInitialized = false;
 	
-	private Pawn _parent;
+	private PlayerPawn _parent;
 
 	private GameMgr _gameMgr;
 
@@ -35,7 +35,7 @@ public partial class PlayerControl : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_parent = GetParent<Pawn>();
+		_parent = GetParent<PlayerPawn>();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

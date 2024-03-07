@@ -19,6 +19,11 @@ public partial class PlayerPawn: Pawn
         Speed = 1;
     }
     
+    public void Rotate(IdConstants.RotateDirection dir)
+    {
+		GameMgr.PlayerTurnEnd();
+    }
+    
     public void Shoot(ProjectileType type, List<FlagConstants.Direction> directions, int power)
     {
         foreach (var direction in directions)
@@ -28,7 +33,7 @@ public partial class PlayerPawn: Pawn
             var shootDirVector = Utils.RotateDirVectorByDirVector(faceDirVector, relativeDirVector);
             var bullet = _bulletPrefab.Instantiate<Projectile>();
             bullet.Setup(Position, shootDirVector, power);
-            bullet.Collider.SetCollisionLayerValue(4, true);
+            bullet.Collider.SetCollisionLayerValue(3, true);
             bullet.Collider.SetCollisionMaskValue(2, true);
             GameMgr.Map.AddChild(bullet);
         }

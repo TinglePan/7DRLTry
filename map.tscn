@@ -1,8 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnviyd3psi43d"]
+[gd_scene load_steps=4 format=3 uid="uid://bnviyd3psi43d"]
 
 [ext_resource type="Script" path="res://scripts/Map.cs" id="1_o54fx"]
 [ext_resource type="PackedScene" uid="uid://bni73rh5ko31b" path="res://tile.tscn" id="2_gappt"]
 
-[node name="Map" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5mqc"]
+
+[node name="Map" type="Node2D" node_paths=PackedStringArray("_collider", "_colliderShape")]
 script = ExtResource("1_o54fx")
 _tilePrefab = ExtResource("2_gappt")
+_collider = NodePath("MapBB")
+_colliderShape = NodePath("MapBB/CollisionShape2D")
+
+[node name="MapBB" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapBB"]
+shape = SubResource("RectangleShape2D_v5mqc")
+
+[connection signal="area_exited" from="MapBB" to="." method="OnAreaExited"]

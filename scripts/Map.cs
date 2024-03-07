@@ -7,7 +7,9 @@ namespace Proj7DRL.scripts;
 
 public partial class Map : Node
 {
-	[Export] private PackedScene _tilePrefab; 
+	[Export] private PackedScene _tilePrefab;
+	[Export] private Area2D _collider;
+	[Export] private CollisionShape2D _colliderShape;
 	
 	public Tile[,] Tiles;
 
@@ -34,6 +36,7 @@ public partial class Map : Node
 				if (tile != null)
 				{
 					tile.Sprite.Texture = groundTexture;
+					tile.Sprite.SelfModulate = (i + j) % 2 == 0 ? new Color("c0c0c0") : new Color("404040");
 					tile.Position = Utils.MapToWorld(new Vector2I(i, j));
 				}
 				Tiles[i, j] = tile;
@@ -45,6 +48,10 @@ public partial class Map : Node
 				}
 			}
 		}
+		((RectangleShape2D)_colliderShape.Shape).Size = new Vector2(Configuration.MapSize * Configuration.TileSize.X, 
+			Configuration.MapSize * Configuration.TileSize.Y);
+		_colliderShape.Position = new Vector2((float)Configuration.MapSize * Configuration.TileSize.Y / 2, 
+			(float)Configuration.MapSize * Configuration.TileSize.Y / 2);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -75,5 +82,11 @@ public partial class Map : Node
 			}
 		}
 		return availablePos[_gameMgr.RandomInt(count)];
+	}
+
+	public void OnAreaExited(Area2D area)
+	{
+		GD.Print("OnAreaExited Map");
+		area.EmitSignal("area_exited", _collider);
 	}
 }
