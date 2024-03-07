@@ -28,10 +28,9 @@ public partial class PlayerPawn: Pawn
             var shootDirVector = Utils.RotateDirVectorByDirVector(faceDirVector, relativeDirVector);
             var bullet = _bulletPrefab.Instantiate<Projectile>();
             bullet.Setup(Position, shootDirVector, power);
+            bullet.Collider.SetCollisionLayerValue(4, true);
+            bullet.Collider.SetCollisionMaskValue(2, true);
             GameMgr.Map.AddChild(bullet);
-            // var projectile = new Projectile(type, direction, power);
-            // GetParent().AddChild(projectile);
-            // projectile.GlobalPosition = GlobalPosition;
         }
     }
 }

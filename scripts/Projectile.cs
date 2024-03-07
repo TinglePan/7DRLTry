@@ -31,4 +31,9 @@ public partial class Projectile: Node2D
         var velocity = _dir * _speed;
         Position += velocity * (float)delta;
     }
+    
+    public void OnAreaEntered(Area2D area)
+    {
+        QueueFree();
+    }
 }

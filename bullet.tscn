@@ -14,6 +14,11 @@ _speed = 100.0
 texture = ExtResource("2_bud7l")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_pi5f3")
+
+[connection signal="area_entered" from="Area2D" to="." method="OnAreaEntered"]
