@@ -12,3 +12,12 @@ Actually did: Got drag and drop almost done.
 Day3:
 Plan to do: Get drag and drop done. Add some attack.
 Actually did: Removed all control panel things after realizing it's a bit too complicated for me to take care of in only 4 days left. I should focus on getting a playable thing first. I decided to replace the control panel with an ability panel, which exists only for showing what ability the player has gotten. The attack is also changed to some auto attack things just like those survivor games. Whenever the player moves, he automatically makes some attack, either shoot something or perform melee attack, based on what he has got in his ability panel. Let me start by making a simple bullet shooter first.
+
+Day4:
+Forgot to write todays devlog, cover it in short.
+Plan to do: Attack, collision.
+Actually did: Done.
+
+Day5:
+Plan to do: Starting to figured out what the game should be like now. I'll need health bar for both enemies and player. Player will spend money purchasing ability. A shop window is needed. Then add game log text display and ability description text display. Enemies should attack. Melee enemies should slowly approch the player and attack if they get close enough. Ranged ones keeps a distance from the player and should attack if they can aim the player without obstacles in their way. They either aim vertically or horizontally. Maybe diagonally? Then I should add melee attacks to player. After that, simply add more abilities and enemies.
+Actually did: Playing helldiver 2 with friends. I'll mark an end to the dev of this game here. I'm gonna enjoy my weekend playing games and rewrite this project from next week. 

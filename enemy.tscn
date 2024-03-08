@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4o3ysyqcmrhk"]
+[gd_scene load_steps=4 format=3 uid="uid://c4o3ysyqcmrhk"]
 
+[ext_resource type="PackedScene" uid="uid://ctghj7tqlk2yw" path="res://health_bar.tscn" id="2_ikhoj"]
 [ext_resource type="Script" path="res://scripts/HostilePawn.cs" id="2_xsoc2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tcqpn"]
@@ -18,3 +19,9 @@ collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_tcqpn")
+
+[node name="HealthBar" parent="." instance=ExtResource("2_ikhoj")]
+offset_left = 9.0
+offset_top = -10.0
+offset_right = 11.0
+offset_bottom = 10.0
