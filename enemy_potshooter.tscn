@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://018ejph4tb5q"]
+
+[ext_resource type="Script" path="res://scripts/HostilePawn.cs" id="1_1b1u4"]
+[ext_resource type="Script" path="res://scripts/Area2DWithRef.cs" id="2_hvmpr"]
+[ext_resource type="Texture2D" uid="uid://c3asmsrcqbpm8" path="res://images/hostile_potshooter.png" id="2_ig2pp"]
+[ext_resource type="PackedScene" uid="uid://ctghj7tqlk2yw" path="res://health_bar_vert.tscn" id="3_n6l4c"]
+[ext_resource type="Script" path="res://scripts/enemy_ai/PotShooterAi.cs" id="4_apn82"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcqpn"]
+size = Vector2(16, 16)
+
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("Collider", "Sprite")]
+script = ExtResource("1_1b1u4")
+Collider = NodePath("Area2D")
+Sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ig2pp")
+
+[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("Controller")]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("2_hvmpr")
+Controller = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_tcqpn")
+
+[node name="HealthBar" parent="." instance=ExtResource("3_n6l4c")]
+offset_left = 9.0
+offset_top = -10.0
+offset_right = 11.0
+offset_bottom = 10.0
+
+[node name="Ai" type="Node2D" parent="."]
+script = ExtResource("4_apn82")

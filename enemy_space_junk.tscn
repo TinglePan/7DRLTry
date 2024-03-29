@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://b0gd6voch8ldi"]
+
+[ext_resource type="Script" path="res://scripts/HostilePawn.cs" id="1_yxplp"]
+[ext_resource type="Script" path="res://scripts/Area2DWithRef.cs" id="2_5t2ek"]
+[ext_resource type="Texture2D" uid="uid://eej1qv7r6nnv" path="res://images/hostile_meteor.png" id="2_xmnkp"]
+[ext_resource type="PackedScene" uid="uid://ctghj7tqlk2yw" path="res://health_bar_vert.tscn" id="3_c6114"]
+[ext_resource type="Script" path="res://scripts/enemy_ai/MeteorAi.cs" id="4_j1x8v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcqpn"]
+size = Vector2(16, 16)
+
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("Collider", "Sprite")]
+script = ExtResource("1_yxplp")
+Collider = NodePath("Area2D")
+Sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_xmnkp")
+
+[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("Controller")]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("2_5t2ek")
+Controller = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_tcqpn")
+
+[node name="HealthBar" parent="." instance=ExtResource("3_c6114")]
+offset_left = 9.0
+offset_top = -10.0
+offset_right = 11.0
+offset_bottom = 10.0
+
+[node name="Ai" type="Node2D" parent="."]
+script = ExtResource("4_j1x8v")

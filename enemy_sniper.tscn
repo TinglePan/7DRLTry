@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://lymp0o2ikan0"]
+
+[ext_resource type="Script" path="res://scripts/HostilePawn.cs" id="1_8r72f"]
+[ext_resource type="Script" path="res://scripts/Area2DWithRef.cs" id="2_krt8a"]
+[ext_resource type="Texture2D" uid="uid://dwuk7w8e1bkr" path="res://images/hostile_sniper.png" id="2_pmja6"]
+[ext_resource type="PackedScene" uid="uid://ctghj7tqlk2yw" path="res://health_bar_vert.tscn" id="3_4q3a7"]
+[ext_resource type="Script" path="res://scripts/enemy_ai/PreciseShooterAi.cs" id="4_kjsmm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcqpn"]
+size = Vector2(16, 16)
+
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("Collider", "Sprite")]
+script = ExtResource("1_8r72f")
+Collider = NodePath("Area2D")
+Sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_pmja6")
+
+[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("Controller")]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("2_krt8a")
+Controller = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_tcqpn")
+
+[node name="HealthBar" parent="." instance=ExtResource("3_4q3a7")]
+offset_left = 9.0
+offset_top = -10.0
+offset_right = 11.0
+offset_bottom = 10.0
+
+[node name="Ai" type="Node2D" parent="."]
+script = ExtResource("4_kjsmm")
