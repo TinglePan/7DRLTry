@@ -3,10 +3,8 @@
 public class EnemyDef
 {
     public int Id;
-    public int Tier;
+    public string Name;
     public int Hp;
-    public int AiName;
-    public int Power;
-    public int AttackCooldown;
+    public string AiName;
     public int ScrapsGranted;
 }

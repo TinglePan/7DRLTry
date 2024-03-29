@@ -6,6 +6,8 @@ public partial class Tile : Node2D
 {
 	[Export] public Sprite2D Sprite;
 	[Export] public Area2D Collider;
+
+	public Vector2I MapPos => Utils.WorldToMap(Position); 
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

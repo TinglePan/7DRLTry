@@ -19,7 +19,25 @@ public static class AbilityDefs
                 Args = new Dictionary()
                 {
                     {"power", "1"},
-                    {"cooldown", "2"},
+                    {"cooldown", "1"},
+                    {"directions", new Array {(int)FlagConstants.Direction.Up}}
+                }
+            }
+        },
+        {
+            1, new AbilityDef()
+            {
+                Id = 1,
+                DisplayName = "Test laser ability",
+                Description = "Test laser ability description",
+                IconPath = "res://images/ability_laser_shooter_front.png",
+                Type = "ShootLaserAbility",
+                Args = new Dictionary()
+                {
+                    {"power", "2" },
+                    {"dotPower", "1" },
+                    {"cooldown", "4" },
+                    {"duration", "2" },
                     {"directions", new Array {(int)FlagConstants.Direction.Up}}
                 }
             }

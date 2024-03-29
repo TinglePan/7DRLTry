@@ -1,8 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvpy1yk5c1433"]
+[gd_scene load_steps=9 format=3 uid="uid://dvpy1yk5c1433"]
 
 [ext_resource type="PackedScene" uid="uid://bnviyd3psi43d" path="res://map.tscn" id="1_1ws65"]
 [ext_resource type="Theme" uid="uid://4kn875mv162e" path="res://test_theme.tres" id="2_o62u7"]
+[ext_resource type="PackedScene" uid="uid://trs7krxiovec" path="res://shop.tscn" id="2_x0kxg"]
+[ext_resource type="PackedScene" uid="uid://p6sqtcdnjy6d" path="res://health_bar_hor.tscn" id="3_rrgjt"]
 [ext_resource type="PackedScene" uid="uid://b34kccwiw8mn2" path="res://ability_panel.tscn" id="3_vgcsf"]
+[ext_resource type="Script" path="res://scripts/GameInfo.cs" id="3_vqr3q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scvnq"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1etx7"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -14,56 +26,178 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="GameWindow" type="CenterContainer" parent="."]
+[node name="GameWindow" type="Control" parent="."]
 custom_minimum_size = Vector2(768, 432)
 layout_mode = 1
+anchors_preset = 0
 offset_right = 768.0
 offset_bottom = 432.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameWindow"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="GameWindow/VBoxContainer"]
-texture_filter = 1
-layout_mode = 2
-text = "Map
-"
-
-[node name="MapWrapper" type="Control" parent="GameWindow/VBoxContainer"]
+[node name="MapWrapper" type="Control" parent="GameWindow"]
 custom_minimum_size = Vector2(360, 360)
 layout_mode = 2
+anchors_preset = 0
+offset_left = 204.0
+offset_top = 36.0
+offset_right = 564.0
+offset_bottom = 396.0
 
-[node name="Map" parent="GameWindow/VBoxContainer/MapWrapper" instance=ExtResource("1_1ws65")]
+[node name="Map" parent="GameWindow/MapWrapper" instance=ExtResource("1_1ws65")]
 
-[node name="MessageWindow" type="MarginContainer" parent="."]
+[node name="Shop" parent="GameWindow" instance=ExtResource("2_x0kxg")]
+visible = false
+layout_mode = 1
+
+[node name="GameInfoWindow" type="Control" parent="." node_paths=PackedStringArray("_hpBar", "_hpValueLabel", "_maxHpValueLabel", "_scrapValueLabel")]
 custom_minimum_size = Vector2(768, 216)
 layout_mode = 2
+anchors_preset = 0
 offset_top = 432.0
 offset_right = 768.0
 offset_bottom = 648.0
 theme = ExtResource("2_o62u7")
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+script = ExtResource("3_vqr3q")
+_hpBar = NodePath("HBoxContainer/HpBar")
+_hpValueLabel = NodePath("HBoxContainer/HpValue")
+_maxHpValueLabel = NodePath("HBoxContainer/MaxHpValue")
+_scrapValueLabel = NodePath("HBoxContainer2/ScrapValue")
 
-[node name="AbilityPanelWindow" type="CenterContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="GameInfoWindow"]
 layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -368.0
+offset_right = -68.0
+offset_bottom = 30.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="GameInfoWindow/HBoxContainer"]
+layout_mode = 2
+text = "HP:"
+
+[node name="HpBar" parent="GameInfoWindow/HBoxContainer" instance=ExtResource("3_rrgjt")]
+layout_mode = 2
+size_flags_vertical = 1
+
+[node name="HpValue" type="Label" parent="GameInfoWindow/HBoxContainer"]
+layout_mode = 2
+text = "x"
+
+[node name="Label2" type="Label" parent="GameInfoWindow/HBoxContainer"]
+layout_mode = 2
+text = "/"
+
+[node name="MaxHpValue" type="Label" parent="GameInfoWindow/HBoxContainer"]
+layout_mode = 2
+text = "y"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GameInfoWindow"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -318.0
+offset_right = -18.0
+offset_bottom = 30.0
+grow_horizontal = 0
+alignment = 2
+
+[node name="Label" type="Label" parent="GameInfoWindow/HBoxContainer2"]
+layout_mode = 2
+text = "Scraps:"
+
+[node name="ScrapValue" type="Label" parent="GameInfoWindow/HBoxContainer2"]
+layout_mode = 2
+text = "x
+"
+
+[node name="MarginContainer" type="MarginContainer" parent="GameInfoWindow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Panel" type="Panel" parent="GameInfoWindow/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_scvnq")
+
+[node name="MarginContainer" type="MarginContainer" parent="GameInfoWindow/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="GameInfoWindow/MarginContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_1etx7")
+
+[node name="Label" type="Label" parent="GameInfoWindow/MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Test Text"
+
+[node name="DbgButton" type="Button" parent="GameInfoWindow"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Dbg"
+
+[node name="AbilityPanelWindow" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
 offset_left = 768.0
 offset_right = 1152.0
 offset_bottom = 324.0
 
 [node name="AbilityPanel" parent="AbilityPanelWindow" instance=ExtResource("3_vgcsf")]
-layout_mode = 2
+layout_mode = 1
 
-[node name="InspectorWindow" type="MarginContainer" parent="."]
+[node name="InspectorWindow" type="Control" parent="."]
 layout_mode = 2
+anchors_preset = 0
 offset_left = 768.0
 offset_top = 324.0
 offset_right = 1152.0
 offset_bottom = 648.0
 theme = ExtResource("2_o62u7")
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+
+[node name="MarginContainer2" type="MarginContainer" parent="InspectorWindow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Panel" type="Panel" parent="InspectorWindow/MarginContainer2"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_scvnq")
+
+[node name="MarginContainer" type="MarginContainer" parent="InspectorWindow/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="InspectorWindow/MarginContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_1etx7")
+
+[node name="Label" type="Label" parent="InspectorWindow/MarginContainer2/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Test Text"

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4o3ysyqcmrhk"]
+[gd_scene load_steps=5 format=3 uid="uid://blmnv81dty2x2"]
 
-[ext_resource type="PackedScene" uid="uid://ctghj7tqlk2yw" path="res://health_bar.tscn" id="2_ikhoj"]
+[ext_resource type="PackedScene" uid="uid://ctghj7tqlk2yw" path="res://health_bar_vert.tscn" id="2_25xrb"]
+[ext_resource type="Script" path="res://scripts/Area2DWithRef.cs" id="2_o36ot"]
 [ext_resource type="Script" path="res://scripts/HostilePawn.cs" id="2_xsoc2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tcqpn"]
@@ -13,14 +14,16 @@ Sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("Controller")]
 collision_layer = 2
 collision_mask = 7
+script = ExtResource("2_o36ot")
+Controller = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_tcqpn")
 
-[node name="HealthBar" parent="." instance=ExtResource("2_ikhoj")]
+[node name="HealthBar" parent="." instance=ExtResource("2_25xrb")]
 offset_left = 9.0
 offset_top = -10.0
 offset_right = 11.0

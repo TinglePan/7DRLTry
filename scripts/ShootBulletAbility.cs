@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Godot;
 using Godot.Collections;
 
 namespace Proj7DRL.scripts;
@@ -25,13 +26,23 @@ public class ShootBulletAbility: Ability
 
     public override void OnMove()
     {
+        base.OnMove();
         if (_cooldownCounter > 0)
         {
             _cooldownCounter--;
         }
         else
         {
-            GameMgr.PlayerPawn.Shoot(ProjectileType.Bullet, Directions, Power);
+            foreach (var direction in Directions)
+            {
+                GameMgr.PlayerPawn.Shoot(ProjectileType.Bullet, new System.Collections.Generic.Dictionary<string, Variant>()
+                {
+                    { "startPos", GameMgr.PlayerPawn.MapPos.Value },
+                    { "power", Power },
+                    { "source", GameMgr.PlayerPawn },
+                    { "dirVec", GameMgr.PlayerPawn.Dir2Dxy(Utils.RotateDirByDir(direction, GameMgr.PlayerPawn.FaceDirection))}
+                });
+            }
             _cooldownCounter = Cooldown;
         }
     }

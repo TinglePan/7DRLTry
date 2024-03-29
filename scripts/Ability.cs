@@ -26,19 +26,25 @@ public class Ability
 
     public virtual void OnMove()
     {
+        OnAction();
     }
 
     public virtual void OnStall()
     {
-        
+        OnAction();
     }
 
     public virtual void OnRotate()
     {
-        
+        OnAction();
     }
 
     public virtual void OnHit()
     {
+    }
+
+    public virtual void OnAction()
+    {
+        
     }
 }

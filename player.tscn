@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://djaluh64fbddn"]
+[gd_scene load_steps=7 format=3 uid="uid://djaluh64fbddn"]
 
 [ext_resource type="Script" path="res://scripts/PlayerPawn.cs" id="1_om3ho"]
 [ext_resource type="PackedScene" uid="uid://bhgrpmfqfcob8" path="res://bullet.tscn" id="2_bgl0p"]
 [ext_resource type="Texture2D" uid="uid://dluq2gscnn3b7" path="res://images/player.png" id="2_f41i1"]
 [ext_resource type="Script" path="res://scripts/PlayerControl.cs" id="2_n4bpb"]
+[ext_resource type="Script" path="res://scripts/Area2DWithRef.cs" id="5_m7sud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_caliy"]
 size = Vector2(16, 16)
@@ -20,8 +21,10 @@ texture = ExtResource("2_f41i1")
 [node name="PlayerControl" type="Node" parent="."]
 script = ExtResource("2_n4bpb")
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_mask = 11
+[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("Controller")]
+collision_mask = 3
+script = ExtResource("5_m7sud")
+Controller = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_caliy")

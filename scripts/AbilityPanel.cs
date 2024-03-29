@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Xsl;
 using Godot;
 
 namespace Proj7DRL.scripts;
@@ -33,6 +34,9 @@ public partial class AbilityPanel: Control
             case "ShootBulletAbility":
                 ability = new ShootBulletAbility(id, _gameMgr);
                 break;
+            case "ShootLaserAbility":
+                ability = new ShootLaserAbility(id, _gameMgr);
+                break;
             default:
                 ability = new Ability(id, _gameMgr);
                 break;
@@ -40,8 +44,17 @@ public partial class AbilityPanel: Control
         _abilities.Add(ability);
         ability.OnGetAbility();
         var icon = _iconPrefab.Instantiate<AbilityIcon>();
-        icon.Texture = GD.Load<Texture2D>(ability.IconPath);
+        icon.Setup(ability, _gameMgr.InspectorLabel);
         _gridContainer.AddChild(icon);
+    }
+
+    public void Clear()
+    {
+        foreach (var childNode in _gridContainer.GetChildren())
+        {
+            childNode.QueueFree();
+        }
+        _abilities.Clear();
     }
 
     public void OnPlayerMove()

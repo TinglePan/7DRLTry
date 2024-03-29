@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bni73rh5ko31b"]
+[gd_scene load_steps=4 format=3 uid="uid://bni73rh5ko31b"]
 
 [ext_resource type="Script" path="res://scripts/Tile.cs" id="1_2rp4p"]
+[ext_resource type="Script" path="res://scripts/Area2DWithRef.cs" id="2_mclt6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qocg0"]
 size = Vector2(8, 8)
@@ -12,9 +13,11 @@ Collider = NodePath("Area2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("Controller")]
 collision_layer = 16
 collision_mask = 0
+script = ExtResource("2_mclt6")
+Controller = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_qocg0")

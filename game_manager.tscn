@@ -1,10 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://jqohutbsssc8"]
+[gd_scene load_steps=8 format=3 uid="uid://jqohutbsssc8"]
 
 [ext_resource type="Script" path="res://scripts/GameMgr.cs" id="1_grx8h"]
 [ext_resource type="PackedScene" uid="uid://djaluh64fbddn" path="res://player.tscn" id="3_k2rto"]
-[ext_resource type="PackedScene" uid="uid://c4o3ysyqcmrhk" path="res://enemy.tscn" id="4_ng6wp"]
+[ext_resource type="PackedScene" uid="uid://b0gd6voch8ldi" path="res://enemy_space_junk.tscn" id="3_u6cw6"]
+[ext_resource type="PackedScene" uid="uid://018ejph4tb5q" path="res://enemy_potshooter.tscn" id="4_x7ml2"]
+[ext_resource type="PackedScene" uid="uid://lymp0o2ikan0" path="res://enemy_sniper.tscn" id="5_hbf0g"]
+[ext_resource type="PackedScene" uid="uid://bhgrpmfqfcob8" path="res://bullet.tscn" id="6_waq0a"]
+[ext_resource type="PackedScene" uid="uid://cb115ow0rj30a" path="res://laser.tscn" id="7_j0570"]
 
 [node name="GameMgr" type="Node2D"]
 script = ExtResource("1_grx8h")
 _playerPrefab = ExtResource("3_k2rto")
-_enemyPrefab = ExtResource("4_ng6wp")
+_enemyMeteorPrefab = ExtResource("3_u6cw6")
+_enemyTurretPrefab = ExtResource("4_x7ml2")
+_enemySniperPrefab = ExtResource("5_hbf0g")
+BulletPrefab = ExtResource("6_waq0a")
+MissilePrefab = ExtResource("6_waq0a")
+LaserPrefab = ExtResource("7_j0570")
